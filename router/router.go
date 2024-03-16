@@ -77,7 +77,6 @@ func graphqlHandler() gin.HandlerFunc {
 		Playground: true,
 	})
 
-	// 只需要通过Gin简单封装即可
 	return func(c *gin.Context) {
 		h.ServeHTTP(c.Writer, c.Request)
 	}

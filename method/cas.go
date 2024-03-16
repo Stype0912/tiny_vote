@@ -1,9 +1,14 @@
 package method
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+	"tiny_vote/model/redis"
+)
 
 func Cas(p graphql.ResolveParams) (interface{}, error) {
-	CurrentTicket.mutex.Lock()
-	defer CurrentTicket.mutex.Unlock()
-	return CurrentTicket.ticketId, nil
+	currentTicket, err := redis.GetTicket()
+	if err != nil {
+		return false, err
+	}
+	return currentTicket, nil
 }

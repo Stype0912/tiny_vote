@@ -1,23 +1,17 @@
 package method
 
 import (
+	"log"
 	"math/rand"
-	"sync"
 	"time"
+	"tiny_vote/model/redis"
 )
 
-type Ticket struct {
-	mutex      sync.Mutex
-	ticketId   string
-	expiration time.Time
-}
-
-var CurrentTicket Ticket
-
 var letters = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+var refreshInterval = 2 * time.Second
 
 func init() {
-	go GenerateTicket()
+	go generateTicket()
 }
 
 func randStr(n int) string {
@@ -28,12 +22,12 @@ func randStr(n int) string {
 	return string(b)
 }
 
-func GenerateTicket() {
+func generateTicket() {
 	for {
-		time.Sleep(2 * time.Second)
-		CurrentTicket.mutex.Lock()
-		CurrentTicket.ticketId = randStr(20)
-		CurrentTicket.expiration = time.Now().Add(2 * time.Second)
-		CurrentTicket.mutex.Unlock()
+		time.Sleep(refreshInterval)
+		err := redis.SetTicket(randStr(20))
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }

@@ -1,0 +1,38 @@
+version: '3'
+services:
+  web:
+    container_name: "web-tiny-vote"
+    build: .
+    ports:
+      - "8888:8888"
+    restart: on-failure
+    depends_on:
+      - redis
+      - database
+    networks:
+      - my_net
+    links:
+      - database
+      - redis
+  redis:
+    container_name: "redis-tiny-vote"
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - my_net
+  database:
+    build: ./model/db
+    container_name: "mysql-tiny-vote"
+    ports:
+      - "3307:3307"
+    networks:
+      - my_net
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: "123456"
+
+networks:
+  my_net:
+    driver: bridge

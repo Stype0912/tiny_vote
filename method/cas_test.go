@@ -7,9 +7,12 @@ import (
 	"sync"
 	"testing"
 	"time"
+	"tiny_vote/model/redis"
 )
 
 func TestCas(t *testing.T) {
+	t.Parallel()
+	redis.Init()
 	var testCounts int = 100
 	var wg sync.WaitGroup
 	wg.Add(testCounts)
