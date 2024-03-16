@@ -1,6 +1,9 @@
 package redis
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestRedisConnect(t *testing.T) {
 	t.Parallel()
@@ -14,5 +17,9 @@ func TestRedisConnect(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(GetTicket())
+	ticket, err := GetTicket()
+	if err != nil {
+		t.Error(err)
+	}
+	assert.NotEqual(t, "", ticket)
 }
