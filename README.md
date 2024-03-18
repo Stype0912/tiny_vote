@@ -16,6 +16,7 @@ docker-compose up -d
 ```
 
 ## Running the automation testings
+After the deployment of web service, run the command below.
 ```shell
 go test ./...
 ```
