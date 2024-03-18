@@ -10,7 +10,7 @@ import (
 var letters = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 var refreshInterval = 2 * time.Second
 
-func init() {
+func Init() {
 	go generateTicket()
 }
 
