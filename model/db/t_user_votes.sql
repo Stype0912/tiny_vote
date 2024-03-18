@@ -7,7 +7,7 @@ CREATE TABLE `t_user_votes`
     `name`  varchar(32) NOT NULL,
     `votes` bigint DEFAULT 0,
     primary key (id),
-    unique(name)
+    unique (name)
 ) engine = innoDB
   default charset = utf8;
 

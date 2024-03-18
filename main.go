@@ -8,9 +8,11 @@ import (
 )
 
 func main() {
+	// Initialize database, redis and ticket generation.
 	db.Init()
 	redis.Init()
 	method.Init()
+
 	r := router.Router
 	router.SetRouter()
 	r.Run(":8888")

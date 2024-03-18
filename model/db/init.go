@@ -19,6 +19,7 @@ const scheme = "tiny_vote"
 func Init() {
 	var env, addr string
 	env = os.Getenv("GIN_MODE")
+	// localhost is for local test and release mode is for docker call.
 	if env == gin.ReleaseMode {
 		addr = "mysql-tiny-vote:3307"
 	} else {

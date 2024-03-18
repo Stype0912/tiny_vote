@@ -69,7 +69,7 @@ func graphqlHandler() gin.HandlerFunc {
 		log.Fatalf("Failed to create GraphQL schema: %v", err)
 	}
 
-	// Create GraphQL HTTP handler
+	// Create GraphQL HTTP handler and Enable Playground
 	h := handler.New(&handler.Config{
 		Schema:     &schema,
 		Pretty:     true,

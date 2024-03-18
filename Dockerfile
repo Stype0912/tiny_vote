@@ -1,6 +1,3 @@
-# docker build -t tesla-china-vehicle-app-filing . --platform=linux/amd64
-# docker run -p 80:80 -p 443:443 --restart=always docker.io/library/tesla-china-vehicle-app-filing
-
 FROM golang:1.19
 WORKDIR /go/src/app
 

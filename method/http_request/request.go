@@ -18,7 +18,9 @@ func GraphqlRequest(url string, body string) (respBody []byte, err error) {
 	req.URL.RawQuery = q.Encode()
 
 	resp, err = http.DefaultClient.Do(req)
-	defer resp.Body.Close()
+	if resp != nil {
+		defer resp.Body.Close()
+	}
 	if err != nil {
 		return
 	}
